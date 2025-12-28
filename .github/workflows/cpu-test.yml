@@ -1,18 +1,63 @@
-name: CPU Test
+name: LSCPU 40 Jobs Test
 
 on:
   workflow_dispatch:
 
 jobs:
-  stress-test:
+  lscpu-test:
     runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+      matrix:
+        job_id:
+          - 1
+          - 2
+          - 3
+          - 4
+          - 5
+          - 6
+          - 7
+          - 8
+          - 9
+          - 10
+          - 11
+          - 12
+          - 13
+          - 14
+          - 15
+          - 16
+          - 17
+          - 18
+          - 19
+          - 20
+          - 21
+          - 22
+          - 23
+          - 24
+          - 25
+          - 26
+          - 27
+          - 28
+          - 29
+          - 30
+          - 31
+          - 32
+          - 33
+          - 34
+          - 35
+          - 36
+          - 37
+          - 38
+          - 39
+          - 40
+
     steps:
-      - name: Show CPU Info
+      - name: Show job number
+        run: echo "Running job #${{ matrix.job_id }}"
+
+      - name: Run lscpu
         run: lscpu
 
-      - name: Run 40 jobs for 100 seconds
-        run: |
-          for i in $(seq 1 40); do
-            (timeout 100 bash -c 'while true; do :; done') &
-          done
-          wait
+      - name: Hold job for 100 seconds
+        run: sleep 100
